@@ -46,7 +46,7 @@ public class AnimeController {
     @GetMapping("/top")
     public Page<Anime> getTopAnimes(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
+            @RequestParam(defaultValue = "12") int size
     ) {
         // On définit le tri par rang ici
         Pageable pageable = PageRequest.of(page, size, Sort.by("rank").ascending());
