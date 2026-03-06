@@ -1,0 +1,31 @@
+<div class="container" *ngIf="!isLoading">
+  <div class="card" *ngFor="let anime of animes">
+    <img [src]="anime.imageUrl" [alt]="anime.title">
+
+    <h3>{{ anime.title }}</h3>
+  </div>
+</div>
+
+<div class="loader-box" *ngIf="isLoading">
+  <div class="spinner"></div>
+  <p>Chargement du Top 100...</p>
+</div>
+
+<div class="pagination-bar" *ngIf="!isLoading">
+  <button (click)="previousPage()" [disabled]="currentPage === 0">
+    <span>&larr;</span> Précédent
+  </button>
+
+  <div class="page-info">
+    Page {{ currentPage + 1 }} sur {{ totalPages }}
+  </div>
+
+  <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">
+    Suivant <span>&rarr;</span>
+  </button>
+
+  <div class="page-jump">
+    <span>Aller à :</span>
+    <input type="number" [value]="currentPage + 1" (change)="goToPage($event)" min="1" [max]="totalPages">
+  </div>
+</div>
