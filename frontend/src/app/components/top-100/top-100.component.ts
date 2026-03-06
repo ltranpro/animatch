@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnimeService } from '../../services/anime.service';
+import { AnimeListComponent } from '../anime-list/anime-list.component';
+
 
 @Component({
   selector: 'app-top-100',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AnimeListComponent ],
+
   templateUrl: './top-100.component.html',
   styleUrl: './top-100.component.scss'
 })

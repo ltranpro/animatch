@@ -1,1 +1,10 @@
-<p>anime-list works!</p>
+<div class="anime-grid">
+  <div *ngFor="let anime of animes" class="anime-card">
+    <img [src]="anime.imageUrl" [alt]="anime.title">
+    <h3>{{ anime.title }}</h3>
+  </div>
+</div>
+
+<div *ngIf="animes.length === 0" class="no-data">
+  <p>Aucun animé trouvé...</p>
+</div>
