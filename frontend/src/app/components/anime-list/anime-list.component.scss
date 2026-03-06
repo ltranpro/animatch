@@ -1,57 +1,141 @@
+$primary: #e94560;
+$dark-bg: #1a1a2e;
+$card-bg: rgba(255, 255, 255, 0.05);
+
 :host {
   display: block;
   width: 100%;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background: radial-gradient(circle at top, #16213e 0%, #1a1a2e 100%);
+  padding: 40px 0;
 }
 
 .anime-grid {
   display: grid;
-  /* 'auto-fill' calcule tout seul : il met autant de cartes de 160px minimum que possible */
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 0 30px;
   max-width: 1400px;
   margin: 0 auto;
-}
 
-@media (min-width: 768px) {
-  .anime-grid {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Plus grand sur PC */
-    gap: 30px;
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 0 15px;
   }
 }
-.anime-card { /* REMPLACÉ ICI */
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+.anime-card {
+  text-decoration: none;
+  background: $card-bg;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
-  height: 100%;
-  transition: transform 0.2s;
-  overflow: hidden;
+  position: relative;
 
   &:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    transform: translateY(-10px) scale(1.02);
+    border-color: $primary;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+
+    .card-overlay { opacity: 1; }
+    img { transform: scale(1.1); }
   }
 
-  img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
+  .card-image-wrapper {
+    position: relative;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .score-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      color: #ffcc00;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      z-index: 2;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba($dark-bg, 0.9) 0%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+
+      .type-badge {
+        background: $primary;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .view-btn {
+        background: white;
+        color: $dark-bg;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 0.8rem;
+        cursor: pointer;
+      }
+    }
   }
 
-  h3 {
+  .card-info {
     padding: 15px;
-    font-size: 1rem;
-    color: #222;
-    text-align: center;
-    margin: 0;
+    background: rgba(255, 255, 255, 0.02);
+    flex-grow: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 70px;
-    line-height: 1.3;
+
+    h3 {
+      color: #fff;
+      font-size: 1rem;
+      margin: 0;
+      text-align: center;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.4;
+    }
   }
+}
+
+// État vide
+.no-data-container {
+  text-align: center;
+  color: #fff;
+  padding: 100px 20px;
+
+  .search-icon { font-size: 4rem; margin-bottom: 20px; opacity: 0.5; }
+  h2 { font-size: 2rem; color: $primary; }
 }

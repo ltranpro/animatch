@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core'; // N'oublie pas d'importer Input
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-anime-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './anime-list.component.html',
   styleUrl: './anime-list.component.scss'
 })

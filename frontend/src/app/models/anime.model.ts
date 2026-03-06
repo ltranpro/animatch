@@ -1,6 +1,20 @@
 export interface Anime {
-  id?: number;          // Le '?' signifie que l'ID est optionnel (car la BDD le génère)
-  title: string;       // On force le titre à être une chaîne de caractères
-  synopsis: string;    // Idem pour le résumé
-  imageUrl: string;    // L'URL de l'image pour la balise <img>
+    id: number;
+    title: string;
+    synopsis: string;
+    imageUrl: string;
+    largeImageUrl: string;
+    score: number;
+    rank: number;
+    popularity: number;
+    type: string;
+    source: string;
+    episodes: number;
+    status: string;
+    duration: string;
+    rating: string;
+    year: number;
+    trailerUrl: string; // L'ID YouTube
+    genres: string;
+    studios: string;
 }

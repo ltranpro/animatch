@@ -1,11 +1,15 @@
 package com.animatch.api.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +35,11 @@ public class AnimeController {
         this.jikanService = jikanService;
         this.animeRepository = animeRepository;
         this.animeService = animeService;
+    }
+
+    @GetMapping
+    public List<Anime> getAll() {
+        return animeRepository.findAll();
     }
 
     // Affiche les animés déjà en base (souvent utilisé pour la Home)
@@ -62,5 +71,11 @@ public class AnimeController {
     public String fetchFromJikan() {
         jikanService.saveTopAnimes();
         return "Base de données mise à jour avec Jikan !";
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Anime> getAnimeDetails(@PathVariable Long id) {
+        Anime anime = animeService.getAnimeById(id);
+        return ResponseEntity.ok(anime);
     }
 }

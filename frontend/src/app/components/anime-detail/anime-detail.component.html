@@ -1,0 +1,60 @@
+<div class="detail-container" *ngIf="anime">
+  <div class="hero-header">
+    <div class="poster-box">
+      <img [src]="anime.largeImageUrl || anime.imageUrl" [alt]="anime.title" class="main-poster">
+      <div class="score-badge">
+        <span class="star">★</span>
+        <span class="value">{{ anime.score || 'N/A' }}</span>
+        <span class="total">/10</span>
+      </div>
+    </div>
+
+    <div class="main-info">
+      <h1 class="title">{{ anime.title }}</h1>
+      <div class="quick-meta">
+        <span><i class="fas fa-calendar-alt"></i> {{ anime.year }}</span>
+        <span class="separator">•</span>
+        <span><i class="fas fa-film"></i> {{ anime.type }}</span>
+        <span class="separator">•</span>
+        <span class="status-pill" [class.completed]="anime.status === 'Finished Airing'">
+          {{ anime.status }}
+        </span>
+      </div>
+
+      <div class="genres-list">
+        <span class="genre-tag" *ngFor="let genre of anime.genres?.split(', ')">
+          {{ genre }}
+        </span>
+      </div>
+
+      <div class="synopsis-section">
+        <h3><i class="fas fa-align-left"></i> Synopsis</h3>
+        <p>{{ anime.synopsis }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="label">Rang</span>
+      <span class="number">#{{ anime.rank }}</span>
+    </div>
+    <div class="stat-card">
+      <span class="label">Épisodes</span>
+      <span class="number">{{ anime.episodes }}</span>
+    </div>
+    <div class="stat-card">
+      <span class="label">Studio</span>
+      <span class="number-text">{{ anime.studios }}</span>
+    </div>
+  </div>
+
+  <div class="video-section" *ngIf="anime.trailerUrl">
+    <h2 class="section-title">Trailer Officiel</h2>
+    <div class="video-wrapper">
+      <div class="ratio shadow-2xl">
+        <iframe [src]="getSafeTrailerUrl(anime.trailerUrl)" allowfullscreen class="youtube-iframe"></iframe>
+      </div>
+    </div>
+  </div>
+</div>

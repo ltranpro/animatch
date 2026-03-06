@@ -17,17 +17,35 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Anime {
     
-    @Id
+  @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(unique = true)
+
     private String title;
 
-    @Column(columnDefinition = "TEXT") // Pour accepter les longs textes de synopsis
+    @Column(columnDefinition = "TEXT")
     private String synopsis;
 
     private String imageUrl;
-    private Double score; // La note (ex: 9.12)
-    private Integer rank; // Son rang mondial (ex: 1)
+    private String largeImageUrl; // Pour le fond de la page détails
+
+    private Double score;
+    private Integer rank;
+    private Integer popularity; // Nouveau : utile pour le tri
+
+    private String type;        // TV, Movie, etc.
+    private String source;      // Manga, Original, etc.
+    private Integer episodes;
+    private String status;      // Finished Airing, etc.
+    private String duration;
+    private String rating;      // PG-13, etc.
+    private Integer year;
+
+    private String trailerUrl;  // ID YouTube pour l'embed
+    
+    @Column(columnDefinition = "TEXT")
+    private String genres;      // On stockera "Action, Fantasy"
+
+    @Column(columnDefinition = "TEXT")
+    private String studios;     // On stockera "MAPPA, Madhouse"
 }

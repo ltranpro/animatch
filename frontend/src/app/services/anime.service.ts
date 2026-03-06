@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Anime } from "../models/anime.model";
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +29,8 @@ export class AnimeService {
     // Résultat : http://localhost:8080/api/animes/catalogue
     return this.http.get<any>(`${this.apiUrl}/catalogue`, { params });
   }
+
+  getAnimeById(id: number): Observable<Anime> {
+  return this.http.get<Anime>(`${this.apiUrl}/${id}`);
+}
 }
