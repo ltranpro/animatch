@@ -1,0 +1,132 @@
+.navbar {
+  position: fixed; // Elle flotte au-dessus du contenu
+  top: 0;
+  width: 100%;
+  height: 70px;
+  z-index: 1000;
+  background: rgba(15, 15, 15, 0.7); // Fond sombre transparent
+  backdrop-filter: blur(15px); // L'effet de flou Apple
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+
+  .navbar-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -1px;
+    cursor: pointer;
+
+    span {
+      color: #e50914; // Le rouge Netflix sur le "MATCH"
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 35px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); // Centrage parfait des liens
+
+    a {
+      color: #b3b3b3;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 8px 0;
+
+      &:hover {
+        color: #fff;
+      }
+
+      &.active {
+        color: #fff;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: #e50914;
+          border-radius: 2px;
+          box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+        }
+      }
+    }
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .btn-search {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+      &:hover { transform: scale(1.1); }
+    }
+
+    .user-avatar {
+  width: 38px;
+  height: 38px;
+  // Dégradé premium du rouge Netflix vers un bordeaux profond
+  background: linear-gradient(135deg, #e50914 0%, #9b080f 100%);
+  border-radius: 8px; // Coins arrondis style iOS/Apple
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+  // L'icône utilisateur à l'intérieur
+  i {
+    color: white;
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+
+  &:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(229, 9, 20, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+
+    i {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+  }
+}
+
+main {
+  padding-top: 70px; // Pour ne pas que le contenu passe sous la navbar
+  min-height: 100vh;
+  background-color: #0f0f0f;
+}

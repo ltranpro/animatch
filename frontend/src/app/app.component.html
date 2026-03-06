@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="logo" routerLink="/">
+      ANI<span>MATCH</span>
+    </div>
+
+    <div class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a routerLink="/top-100" routerLinkActive="active">
+        <i class="fas fa-star"></i> Top 100
+      </a>
+      <a routerLink="/animes" routerLinkActive="active">
+        <i class="fas fa-list"></i> Catalogue
+      </a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="btn-search"><i class="fas fa-search"></i></button>
+      <div class="user-avatar">
+        <i class="fas fa-user" style="color: white; margin: auto;"></i>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
