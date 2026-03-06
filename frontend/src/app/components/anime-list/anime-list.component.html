@@ -1,10 +1,31 @@
-<div class="anime-grid">
-  <div *ngFor="let anime of animes" class="anime-card">
-    <img [src]="anime.imageUrl" [alt]="anime.title">
-    <h3>{{ anime.title }}</h3>
+<div class="anime-container" *ngIf="animes && animes.length > 0; else noData">
+  <div class="anime-grid">
+    <a *ngFor="let anime of animes" [routerLink]="['/anime', anime.id]" class="anime-card">
+
+      <div class="card-image-wrapper">
+        <img [src]="anime.imageUrl" [alt]="anime.title" loading="lazy">
+
+        <div class="score-tag" *ngIf="anime.score">
+          <span class="star">★</span> {{ anime.score }}
+        </div>
+
+        <div class="card-overlay">
+          <span class="type-badge">{{ anime.type }}</span>
+          <button class="view-btn">Voir détails</button>
+        </div>
+      </div>
+
+      <div class="card-info">
+        <h3>{{ anime.title }}</h3>
+      </div>
+    </a>
   </div>
 </div>
 
-<div *ngIf="animes.length === 0" class="no-data">
-  <p>Aucun animé trouvé...</p>
-</div>
+<ng-template #noData>
+  <div class="no-data-container">
+    <div class="search-icon">🔍</div>
+    <h2>Aucun animé trouvé</h2>
+    <p>La base de données semble vide ou aucun résultat ne correspond.</p>
+  </div>
+</ng-template>

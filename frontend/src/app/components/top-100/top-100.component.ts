@@ -17,7 +17,7 @@ export class Top100Component implements OnInit {
   isLoading = true;
   currentPage = 0;
   totalPages = 0;
-  pageSize = 10;
+  pageSize = 12;
 
   constructor(private animeService: AnimeService) {}
 
