@@ -1,0 +1,35 @@
+services:
+  # La base de données pour stocker les utilisateurs et leurs préférences
+  db:
+    image: postgres:15-alpine
+    container_name: animatch-db
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: animatch_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  # Le futur Back-end Spring Boot
+  backend:
+    build: ./backend
+    container_name: animatch-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/animatch_db
+
+  # Le futur Front-end Angular
+  frontend:
+    build: ./frontend
+    container_name: animatch-ui
+    ports:
+      - "4200:4200"
+
+volumes:
+  db-data:

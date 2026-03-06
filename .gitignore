@@ -1,0 +1,13 @@
+
+# Angular
+/frontend/node_modules/
+/frontend/dist/
+
+# Spring Boot
+/backend/target/
+*.class
+
+# Divers
+.DS_Store
+.idea/
+.vscode/
