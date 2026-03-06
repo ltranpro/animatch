@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnimeService } from '../../services/anime.service';
+import { AnimeListComponent } from '../anime-list/anime-list.component';
+
 
 @Component({
   selector: 'app-top-100',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AnimeListComponent ],
+
   templateUrl: './top-100.component.html',
   styleUrl: './top-100.component.scss'
 })
@@ -24,7 +27,8 @@ export class Top100Component implements OnInit {
 
   loadAnimes() {
     this.isLoading = true;
-    this.animeService.getAnimes(this.currentPage, this.pageSize).subscribe({
+    // ON CHANGE getAnimes PAR getTopAnimes
+    this.animeService.getTopAnimes(this.currentPage, this.pageSize).subscribe({
       next: (data: any) => {
         this.animes = data.content;
         this.totalPages = data.totalPages;
