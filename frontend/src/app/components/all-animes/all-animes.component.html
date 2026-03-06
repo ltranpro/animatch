@@ -1,1 +1,21 @@
-<app-anime-list [animes]="animes"></app-anime-list>
+<div class="catalogue-container">
+
+  <div class="selection-header">
+    <h2>Catalogue <span class="current-letter">{{ selectedLetter || '...' }}</span></h2>
+    <p class="subtitle">Parcourez les animés par ordre alphabétique</p>
+  </div>
+
+  <div class="alphabet-wrapper">
+    <div class="alphabet-bar">
+      <button *ngFor="let letter of alphabet" (click)="selectLetter(letter)" [class.active]="selectedLetter === letter"
+        class="letter-btn">
+        {{ letter }}
+      </button>
+    </div>
+  </div>
+
+  <div class="results-area">
+    <app-anime-list [animes]="animes"></app-anime-list>
+  </div>
+
+</div>

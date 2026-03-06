@@ -20,11 +20,14 @@ public class Anime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @Column(unique = true)
     private String title;
 
     @Column(columnDefinition = "TEXT") // Pour accepter les longs textes de synopsis
     private String synopsis;
 
     private String imageUrl;
+    private Double score; // La note (ex: 9.12)
+    private Integer rank; // Son rang mondial (ex: 1)
 }

@@ -14,6 +14,10 @@ public class JikanResponse {
         private String synopsis;
         private Images images;
 
+        // AJOUTE CES DEUX LIGNES ICI :
+        private Double score;
+        private Integer rank;
+
         @Data
         public static class Images {
             private Jpg jpg;
