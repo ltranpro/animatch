@@ -32,7 +32,12 @@ public class AnimeService { // La classe DOIT être déclarée ici
     }
 
     return localResults;
-}
+    }
+
+    public Anime getAnimeById(Long id) {
+    return animeRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Animé non trouvé avec l'id : " + id));
+    }
 
     
     

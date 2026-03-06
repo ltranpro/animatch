@@ -23,17 +23,52 @@ public class JikanService {
     }
 
     // Méthode unique pour transformer le DTO en Entité
-    private Anime mapToEntity(JikanResponse.AnimeData data) {
-        Anime anime = new Anime();
-        anime.setTitle(data.getTitle());
-        anime.setSynopsis(data.getSynopsis());
-        anime.setScore(data.getScore());
-        anime.setRank(data.getRank());
-        if (data.getImages() != null && data.getImages().getJpg() != null) {
-            anime.setImageUrl(data.getImages().getJpg().getImage_url());
-        }
-        return anime;
+private Anime mapToEntity(JikanResponse.AnimeData data) {
+    Anime anime = new Anime();
+    anime.setTitle(data.getTitle());
+    anime.setSynopsis(data.getSynopsis());
+    anime.setScore(data.getScore());
+    anime.setRank(data.getRank());
+    anime.setPopularity(data.getPopularity()); // Nouvelle donnée
+    
+    // Gestion des images (on prend la large pour la fiche détail)
+    if (data.getImages() != null && data.getImages().getJpg() != null) {
+        anime.setImageUrl(data.getImages().getJpg().getImage_url());
+        anime.setLargeImageUrl(data.getImages().getJpg().getLarge_image_url());
     }
+
+    // Infos techniques
+    anime.setType(data.getType());
+    anime.setSource(data.getSource());
+    anime.setEpisodes(data.getEpisodes());
+    anime.setStatus(data.getStatus());
+    anime.setDuration(data.getDuration());
+    anime.setRating(data.getRating());
+    anime.setYear(data.getYear());
+
+    // Trailer YouTube (on ne stocke que l'ID pour plus de facilité côté Angular)
+    if (data.getTrailer() != null) {
+        anime.setTrailerUrl(data.getTrailer().getYoutube_id());
+    }
+
+    // Mapping des Genres (List -> String)
+    if (data.getGenres() != null) {
+        String genresStr = data.getGenres().stream()
+            .map(JikanResponse.Genre::getName)
+            .collect(java.util.stream.Collectors.joining(", "));
+        anime.setGenres(genresStr);
+    }
+
+    // Mapping des Studios (List -> String)
+    if (data.getStudios() != null) {
+        String studiosStr = data.getStudios().stream()
+            .map(JikanResponse.Studio::getName)
+            .collect(java.util.stream.Collectors.joining(", "));
+        anime.setStudios(studiosStr);
+    }
+
+    return anime;
+}
 
     public List<Anime> saveTopAnimes() {
         animeRepository.deleteAll(); // Attention: radical si tu as des relations (favoris, etc.)
